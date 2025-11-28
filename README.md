@@ -103,13 +103,13 @@ pip install -r requirements.txt
 
 
 
-Sensitivity varies with scale type, weight bin, and box type.
+**1-** Sensitivity varies with scale type, weight bin, and box type.
 
-Lighter bins → higher sensitivity; heavier bins → lower sensitivity.
+**2-** Lighter bins → higher sensitivity; heavier bins → lower sensitivity.
 
-Post-training evaluation shows almost all weeks meet criteria.
+**3-** Post-training evaluation shows almost all weeks meet criteria.
 
-The agent learned to balance noise reduction and responsiveness.
+**4-** The agent learned to balance noise reduction and responsiveness.
 
 ## References
 
