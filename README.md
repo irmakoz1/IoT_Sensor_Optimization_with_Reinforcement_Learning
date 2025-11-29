@@ -3,7 +3,7 @@
 [![Python](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-This repository implements a **Q-learning algorithm** to optimize accelerometer sensitivity in supply chain scales, dynamically adjusting settings based on `scale_type`, `weight_bin`, and `box_type`. The method improves weight classification accuracy while balancing hardware differences and state frequencies.
+This repository implements an offline **Q-learning** algorithm to optimize accelerometer sensitivity in supply chain scales. The problem involves a trade-off between over-triggering (TOO_MANY) and under-triggering (TOO_FEW) measurements. By adjusting settings based on scale_type, weight_bin, and box_type, the algorithm improves weight classification accuracy, accounts for hardware differences, balances state frequencies, and reduces unnecessary data transmissions—helping to preserve sensor battery life.
 
 ---
 
