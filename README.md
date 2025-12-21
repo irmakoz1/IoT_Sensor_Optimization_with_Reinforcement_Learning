@@ -3,8 +3,7 @@
 [![Python](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-This repository implements an offline **Q-learning** algorithm to optimize accelerometer sensitivity in supply chain scales. The problem involves a trade-off between over-triggering (TOO_MANY) and under-triggering (TOO_FEW) measurements. By adjusting settings based on scale_type, weight_bin, and box_type, the algorithm improves weight classification accuracy, accounts for hardware differences, balances state frequencies, and reduces unnecessary data transmissions—helping to preserve sensor battery life.
-
+This repository implements an offline, value-based reinforcement learning approach to optimize accelerometer sensitivity settings in supply chain scales. The task involves a trade-off between over-triggering (TOO_MANY) and under-triggering (TOO_FEW) weight measurements. By selecting sensitivity values conditioned on operational context—defined by scale_type, weight_bin, and box_type—the algorithm aims to reduce critical measurement errors, account for hardware-specific behavior, balance state representation, and minimize unnecessary data transmissions, thereby helping to preserve sensor battery life.
 ---
 
 ##  Overview
@@ -29,13 +28,23 @@ This repository implements an offline **Q-learning** algorithm to optimize accel
 
 ##  Method
 
-1. Use **epsilon-greedy Q-learning** to select actions for each state.  
-2. Compute rewards using closest matches between chosen action and dataset sensitivities.  
-3. Apply penalties for TOO_FEW/TOO_MANY errors and weight less frequent states higher.  
-4. Update Q-values using temporal difference (TD) learning.  
-5. Prune Q-table to top N actions per state for efficiency.  
+1- For each operational context (state), actions are selected using an epsilon-greedy strategy to balance exploration and exploitation.
+
+2- Since the environment is observational, rewards are computed using an offline counterfactual approximation, where the chosen sensitivity is matched to the closest observed sensitivity in the historical data.
+
+3- Measurement outcomes are mapped to reward values, with severe penalties applied to TOO_FEW events to reflect their higher operational cost. Less frequent state–error combinations are upweighted using inverse-frequency weighting.
+
+4- State–action values are updated using temporal-difference–style value updates under a fixed-state (self-transition) assumption, effectively optimizing action selection within each context.
+
+5- To improve stability and efficiency, the Q-table is pruned after each episode to retain only the top-N actions per state.
 
 ---
+
+
+## Notes on Algorithm
+
+Although Q-learning is traditionally used for sequential decision-making problems with explicit state transitions, sensitivity calibration in this setting is quasi-static and context-dependent, with minimal temporal coupling between decisions. As a result, the problem is more accurately modeled as a contextual bandit or static policy optimization task, where Q-learning serves as a stable and interpretable value-based optimization framework. This formulation also enables straightforward extension to online or adaptive reinforcement learning in future work.
+
 
 ##  Folder Structure
 
