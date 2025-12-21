@@ -3,8 +3,9 @@
 [![Python](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-This repository implements an offline, value-based reinforcement learning approach to optimize accelerometer sensitivity settings in supply chain scales. The task involves a trade-off between over-triggering (TOO_MANY) and under-triggering (TOO_FEW) weight measurements. By selecting sensitivity values conditioned on operational context—defined by scale_type, weight_bin, and box_type—the algorithm aims to reduce critical measurement errors, account for hardware-specific behavior, balance state representation, and minimize unnecessary data transmissions, thereby helping to preserve sensor battery life.
 ---
+
+This repository implements an offline, value-based reinforcement learning approach to optimize accelerometer sensitivity settings in supply chain scales. The task involves a trade-off between over-triggering (TOO_MANY) and under-triggering (TOO_FEW) weight measurements. By selecting sensitivity values conditioned on operational context—defined by scale_type, weight_bin, and box_type—the algorithm aims to reduce critical measurement errors, account for hardware-specific behavior, balance state representation, and minimize unnecessary data transmissions, thereby helping to preserve sensor battery life.
 
 ##  Overview
 
