@@ -44,8 +44,7 @@ This repository implements an offline, value-based reinforcement learning approa
 
 ## Notes on Algorithm
 
-Although Q-learning is traditionally used for sequential decision-making problems with explicit state transitions, sensitivity calibration in this setting is quasi-static and context-dependent, with minimal temporal coupling between decisions. As a result, the problem is more accurately modeled as a contextual bandit or static policy optimization task, where Q-learning serves as a stable and interpretable value-based optimization framework. This formulation also enables straightforward extension to online or adaptive reinforcement learning in future work.
-
+Although Q-learning is traditionally used for sequential decision-making problems with explicit state transitions, sensitivity calibration in this setting is quasi-static (one-time decisions, not a chain) and context-dependent, with minimal temporal coupling (today's choice doesn't change tomorrow's state) between decisions. However, we introduce a self-transition assumption (γ = 0.85) to account for cumulative effects like battery drain, transforming independent decisions into a recurring choice problem. This formulation retains Q-learning as a stable and interpretable value-based optimization framework while enabling straightforward extension to online or adaptive reinforcement learning in future work.
 
 ##  Folder Structure
 
