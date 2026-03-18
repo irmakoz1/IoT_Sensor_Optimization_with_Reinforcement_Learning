@@ -130,6 +130,8 @@ pip install -r requirements.txt
 
 - Offline Counterfactual Matching: The heuristic of matching chosen actions to the closest observed sensitivity relies on the assumption that nearby sensitivity levels yield similar outcomes. This approximation may introduce bias, especially in regions with sparse historical data.
 
+- Hyperparameter tuning and reward function: Hyperparameter tuning and adjusting the reward function for the optimized results is time consuming.
+
   ## Conclusion:
   
 This project successfully adapted offline Q-learning to optimize accelerometer sensitivity settings in supply chain scales, framing a quasi-static calibration problem as a contextual bandit with self-transitions. Despite the minimal temporal coupling between decisions, the approach achieved a 120% improvement in cumulative reward (from ~250 to >550) over 1000 episodes and delivered 91% compliance (10 out of 11 validation weeks) with strict operational thresholds errors (TOO_MANY/Automatic ratio < 0.5 per week & TOO_FEW < 2 per week)​ per week. These results validate that value-based reinforcement learning can effectively learn from observational data to balance measurement accuracy and battery preservation, while providing a stable foundation for future extensions to online learning and more complex state representations.
