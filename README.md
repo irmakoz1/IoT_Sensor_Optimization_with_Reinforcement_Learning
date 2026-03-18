@@ -74,19 +74,20 @@ Although Q-learning is traditionally used for sequential decision-making problem
 ---
 
 ##  Installation
-
+```
 git clone https://github.com/irmakoz1/IoT_Sensor_Optimization_with_Reinforcement_Learning.git
 
 cd IoT_Sensor_Optimization_with_Reinforcement_Learning
 
 pip install -r requirements.txt
 
+```
 ---
 ##  Usage
 
--Raw data is not uploaded to git.
+- Raw data is not uploaded to git.
 
--You can start from the processed data.
+- The scripts will run with processed data.
 
 - Update DATA_PATH in the notebook or config.
 
