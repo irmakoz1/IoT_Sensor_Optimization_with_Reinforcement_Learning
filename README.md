@@ -29,15 +29,15 @@ This repository implements an offline, value-based reinforcement learning approa
 
 ##  Method
 
-1- For each operational context (state), actions are selected using an epsilon-greedy strategy to balance exploration and exploitation.
+**1-** For each operational context (state), actions are selected using an epsilon-greedy strategy to balance exploration and exploitation.
 
-2- Since the environment is observational, rewards are computed using an offline counterfactual approximation, where the chosen sensitivity is matched to the closest observed sensitivity in the historical data.
+**2-** Since the environment is observational, rewards are computed using an offline counterfactual approximation, where the chosen sensitivity is matched to the closest observed sensitivity in the historical data.
 
-3- Measurement outcomes are mapped to reward values, with severe penalties applied to TOO_FEW events to reflect their higher operational cost. Less frequent state–error combinations are upweighted using inverse-frequency weighting.
+**3-** Measurement outcomes are mapped to reward values, with severe penalties applied to TOO_FEW events to reflect their higher operational cost. Less frequent state–error combinations are upweighted using inverse-frequency weighting.
 
-4- State–action values are updated using temporal-difference–style value updates under a fixed-state (self-transition) assumption, effectively optimizing action selection within each context.
+**4-** State–action values are updated using temporal-difference–style value updates under a fixed-state (self-transition) assumption, effectively optimizing action selection within each context.
 
-5- To improve stability and efficiency, the Q-table is pruned after each episode to retain only the top-N actions per state.
+**5-** To improve stability and efficiency, the Q-table is pruned after each episode to retain only the top-N actions per state.
 
 ---
 
@@ -119,6 +119,20 @@ pip install -r requirements.txt
 **3-** Post-training evaluation shows almost all weeks meet criteria.
 
 **4-** The agent learned to balance noise reduction and responsiveness.
+
+
+## Limitations:
+- Slow Convergence: The learning process requires a large number of episodes (~1000) to reach near-optimal performance, which may be impractical for rapid deployment or frequent retraining in dynamic environments.
+
+- Run-to-Run Instability: Due to the stochastic nature of epsilon-greedy exploration and offline counterfactual approximations, the final policy can vary across different training runs. This lack of deterministic stability may affect reliability in production settings.
+
+- Self-Transition Assumption: Modeling the problem with γ = 0.85 and self-transitions, while useful for capturing long-term effects, introduces a simplified dynamics that may not fully reflect real-world temporal dependencies (e.g., battery degradation over weeks).
+
+- Offline Counterfactual Matching: The heuristic of matching chosen actions to the closest observed sensitivity relies on the assumption that nearby sensitivity levels yield similar outcomes. This approximation may introduce bias, especially in regions with sparse historical data.
+
+  ## Conclusion:
+  
+This project successfully adapted offline Q-learning to optimize accelerometer sensitivity settings in supply chain scales, framing a quasi-static calibration problem as a contextual bandit with self-transitions. Despite the minimal temporal coupling between decisions, the approach achieved a 120% improvement in cumulative reward (from ~250 to >550) over 1000 episodes and delivered 91% compliance (10 out of 11 validation weeks) with strict operational thresholds errors (TOO_MANY/Automatic ratio < 0.5 per week & TOO_FEW < 2 per week)​ per week. These results validate that value-based reinforcement learning can effectively learn from observational data to balance measurement accuracy and battery preservation, while providing a stable foundation for future extensions to online learning and more complex state representations.
 
 ## References
 
